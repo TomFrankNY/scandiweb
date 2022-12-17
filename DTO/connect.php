@@ -5,13 +5,13 @@ function connect()
     $db_user = 'root';
     $db_password = 'root';
     $db_db = 'CartDB';
-    $db_port = 8889;
+    $db_port = 8887;
 
-    $mysqli = new mysqli(
+$mysqli = new mysqli(
         $db_host,
         $db_user,
         $db_password,
-        $db_db
+        $db_db    
     );
         
     if ($mysqli->connect_error) {

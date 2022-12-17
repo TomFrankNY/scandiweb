@@ -1,8 +1,10 @@
 <?php
-function deleteProduct($mysqli, $sku)
-{
+include "connect.php";
 
-  $dropQuery =  "DELETE FROM products WHERE sku=".$sku;
+function deleteProduct($sku)
+{
+  $mysqli = connect();
+  $dropQuery =  "DELETE FROM products WHERE sku = $sku";
   $result = $mysqli->query($dropQuery);
   if ($result){
       echo "product dropped successfully";

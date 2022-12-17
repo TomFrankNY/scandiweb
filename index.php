@@ -1,9 +1,10 @@
 <?php
-include 'connect.php';
-include 'gallery.php';
-include 'addProduct.php';
-include 'deleteProduct.php';
+include 'DTO/connect.php';
+include 'createGallery.php';
+include 'DTO/addProduct.php';
 $mysqli = connect();
-gallery($mysqli);
-deleteProduct($mysqli, 10);
+// createAddProductPage();
+createGallery($mysqli);
 $mysqli->close();
+
+?>
