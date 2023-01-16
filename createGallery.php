@@ -13,8 +13,7 @@ require_once 'selectProducts.php'
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- link to add product page -->
-    <a href="productAddPage.php">Add</a>
+    <a href="productAddPage.php">Add Product</a>
     <!-- NEED TO ADD LINK TO DELETE BUTTON -->
 </head>
 <?php
@@ -30,7 +29,7 @@ function createGallery($mysqli)
                     // output data of each row
                     while ($row = $result->fetch_assoc()) {
                     ?>
-                        <label for="checkbox"><?php echo $row["sku"], $row["name"], $row["price"], $row["type_id"] ?> Delete </label>
+                        <label for="checkbox"><?php echo $row["sku"], $row["name"], $row["price"], $row["product_type"] ?> Delete </label>
                         <input type="checkbox" name="delete_checkbox[]" class="delete-checkbox" value="<?php echo $row["sku"] ?>">
                         <br>
                     <?php

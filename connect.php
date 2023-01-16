@@ -4,7 +4,7 @@
     $db_host= 'localhost';
     $db_user= 'root';
     $db_password = 'root';
-    $db_db = 'RemakeDB';
+    $db_db = 'cartDB';
     $db_port = 8889;
 
     $mysqli = new mysqli(

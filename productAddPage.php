@@ -22,7 +22,7 @@
 
 <body>
     <form action='addHolder.php' method='post' name='newProduct' id='newProduct'>
-        SKU <input type="number" name="sku" id="sku" >
+        SKU <input type="text" name="sku" id="sku" >
         <br>
         Name: <input type="text" name="name" id="name" required>
         <br>
