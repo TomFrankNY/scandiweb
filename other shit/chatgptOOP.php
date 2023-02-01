@@ -67,7 +67,7 @@ class Book extends Product {
     }
 }
 
-class DVD extends Product {
+class Dvd extends Product {
     private $size;
 
     public function __construct($sku, $name, $price, $size) {

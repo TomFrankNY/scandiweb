@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php require_once 'addHolder.php';
-?>
 <head>
     <!-- do i need php on this file? -->
     <link rel="stylesheet" href="styles.css">
@@ -21,7 +19,7 @@
 </head>
 
 <body>
-    <form action='addHolder.php' method='post' name='newProduct' id='newProduct'>
+    <form action='../controllers/add.php' method='post' name='newProduct' id='newProduct'>
         SKU <input type="text" name="sku" id="sku" >
         <br>
         Name: <input type="text" name="name" id="name" required>

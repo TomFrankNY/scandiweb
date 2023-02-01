@@ -1,5 +1,6 @@
 <?php
-require_once 'selectProducts.php'
+// use Database;
+require_once '../Database.php';
 ?>
 
 <html lang="en">
@@ -17,31 +18,29 @@ require_once 'selectProducts.php'
     <!-- NEED TO ADD LINK TO DELETE BUTTON -->
 </head>
 <?php
-function createGallery($mysqli)
-{
-    $result = selectProducts($mysqli);
+    $db = Database::getInstance();
+    $result = $db->selectProducts();
     if ($result->num_rows > 0) {
 ?>
         <body>
             <div>
-                <form action="form.php" method="post">
+                <form action="../controllers/drop.php" method="post">
                     <?php
                     // output data of each row
                     while ($row = $result->fetch_assoc()) {
                     ?>
-                        <label for="checkbox"><?php echo $row["sku"], $row["name"], $row["price"], $row["product_type"] ?> Delete </label>
-                        <input type="checkbox" name="delete_checkbox[]" class="delete-checkbox" value="<?php echo $row["sku"] ?>">
+                        <label for="checkbox"><?php echo "sku:", $row["sku"], "name:", $row["name"], "price:", $row["price"], "product-type:", $row["productType"] ?> Delete </label>
+                        <input type="checkbox" name="delete_checkbox[]" class="delete-checkbox" value="<?php echo $row["productId"] ?>">
                         <br>
                     <?php
                     }
                     ?>
                     <label for="submit"></label>
-                    <input type="submit" name="submit" value="Submit" />
+                    <input type="submit" name="remove" value="remove" />
     </form>
    </div>
 </body>
 </html>
 <?php
     }
-}
 ?>
