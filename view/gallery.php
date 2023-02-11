@@ -22,7 +22,7 @@ require_once '../Database.php';
     $result = $db->selectProducts();
     if ($result->num_rows > 0) {
 ?>
-        <body>
+        <body> 
             <div>
                 <form action="../controllers/drop.php" method="post">
                     <?php
@@ -30,7 +30,7 @@ require_once '../Database.php';
                     while ($row = $result->fetch_assoc()) {
                     ?>
                         <label for="checkbox"><?php echo "sku:", $row["sku"], "name:", $row["name"], "price:", $row["price"], "product-type:", $row["productType"] ?> Delete </label>
-                        <input type="checkbox" name="delete_checkbox[]" class="delete-checkbox" value="<?php echo $row["productId"] ?>">
+                        <input type="checkbox" name="delete_checkbox[]" class="delete-checkbox" value="<?php echo $row["id"] ?>">
                         <br>
                     <?php
                     }

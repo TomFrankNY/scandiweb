@@ -91,41 +91,57 @@ class Database
         }
     }
 
-    function deleteProduct($id)
-    {
+    // function deleteProduct($id)
+    // {
         
-        $query = "DELETE FROM products WHERE productId = ?";
+    //     $query = "DELETE FROM products WHERE id = ?";
+    //     $result = $this->mysqli->prepare($query);
+    //     $result->bind_param("i", $id);
+    //     $result->execute();
+    //     if ($result) {
+    //         echo "product dropped successfully";
+    //     } else {
+    //         echo  "there was an error dropping the product";
+    //     }
+    // }
+
+function deleteProduct($id)
+{
+    
+        $query = "DELETE  FROM products WHERE id = ?";
         $result = $this->mysqli->prepare($query);
         $result->bind_param("i", $id);
+        $result->execute();
+ 
+        $query = "DELETE FROM `DVD` WHERE `productId` = '$id'";
+        $result = $this->mysqli->prepare($query);
+        $result->bind_param("s", $id);
+        $result->execute();
+
+        $query = "DELETE FROM `book` WHERE `productId` = '$id'";
+        $result = $this->mysqli->prepare($query);
+        $result->bind_param("s", $id);
+        $result->execute();
+
+        $query = "DELETE FROM `furniture` WHERE `productId` = '$id'";
+        $result = $this->mysqli->prepare($query);
+        $result->bind_param("s", $id);
         $result->execute();
         if ($result) {
             echo "product dropped successfully";
         } else {
             echo  "there was an error dropping the product";
         }
-        // $result->close();
-        // $query = "DELETE FROM `DVD` WHERE `productId` = '$id'";
-        // $result = $this->mysqli->prepare($query);
-        // $result->bind_param("s", $id);
-        // $result->execute();
-        // if ($result) {
-        //     echo "product dropped successfully";
-        // } else {
-        //     echo  "there was an error dropping the product";
-        // }
-        
-    }
+    }     
+    
 
-    function selectProducts()
-    {
-        $query = "SELECT *  
-    FROM products
-    LEFT JOIN DVD
-    ON products.productId = DVD.productId
-    LEFT JOIN book
-    ON products.productId = book.productId
-    LEFT JOIN furniture
-    ON products.productId = furniture.productId;";
+    function    selectProducts()
+{
+    $query= "SELECT p.id, p.name, p.sku, p.price, p.productType, d.size as size, NULL as weight, Null as height, Null as length, Null as width FROM products p JOIN DVD d ON p.id = d.productId 
+    UNION 
+    SELECT p.id, p.name, p.sku, p.price, p.productType, NULL as size, b.weight as weight, Null as height, Null as length, Null as width FROM products p JOIN book b ON p.id = b.productId 
+    UNION 
+    SELECT p.id, p.name, p.sku, p.price, p.productType, NULL as size, NULL as weight, f.height as height, f.length as length, f.width as width FROM products p JOIN furniture f ON p.id = f.productId;";
 
         $result = $this->mysqli->query($query);
         return $result;

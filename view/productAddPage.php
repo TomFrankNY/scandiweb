@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- do i need php on this file? -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
         $(document).on('change', '.productSwitcher', function() {
             var target = $(this).data('target');
             var show = $("option:selected", this).data('show');
+            // var require = $("option:selected", this).attr('required', 'true');
             $(target).children().addClass('hide');
+            // $(require).children().addClass('required');
             $(show).removeClass('hide');
+            $(require).addClass('required');
+            $( "div:required" ).click(function() {
+            });
+            // $("input").attr("required", "true");
+            
         });
     </script>
     <meta charset="UTF-8">
@@ -19,15 +27,15 @@
 </head>
 
 <body>
-    <form action='../controllers/add.php' method='post' name='newProduct' id='newProduct'>
-        SKU <input type="text" name="sku" id="sku" >
+    <form action='../controllers/add.php' method='post'>
+        SKU <input type="text" name="sku" id="sku" required>
         <br>
         Name: <input type="text" name="name" id="name" required>
         <br>
         Price: <input type="number" name="price" id="price" required>
         <br>
         Type Switcher
-        <select class="productSwitcher" id="productType" name="productType" data-target=".productType">
+        <select class="productSwitcher" id="productType" name="productType" data-target=".productType" required>
             <option value="">Select...</option>
             <option value="dvd" data-show=".dvd">DVD</option>
             <option value="book" data-show=".book">Book</option>

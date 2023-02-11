@@ -11,6 +11,7 @@ if (isset($_POST['submit'])) {
     $properties['name'] =$_REQUEST['name'];
     $properties['price'] = $_REQUEST['price'];
     $properties['productType'] = $_REQUEST['productType'];
+    $redirect_gallery = '../view/gallery.php';
 
     if ($properties['productType'] == 'dvd') {
         echo 'its a dvd';
@@ -27,5 +28,7 @@ if (isset($_POST['submit'])) {
     }
     
     $product->save();
+    header('Location: '.$redirect_gallery);
+    echo "Product added successfully!";
 }
 ?>
