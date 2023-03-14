@@ -82,8 +82,15 @@ class Database
     function addProduct($properties)
     {
         $addProduct = "INSERT INTO products (sku, name, price, productType) VALUES (?, ?, ?, ?);";
+
         $result = $this->mysqli->prepare($addProduct);
         $result->bind_param('ssss', $properties['sku'], $properties['name'], $properties['price'], $properties['productType']);
+        $sku = ($_POST['sku']);
+        $checkProduct = "SELECT sku FROM products WHERE sku='$sku'";
+        $check = $this->mysqli->query($checkProduct);
+        if (mysqli_num_rows($check) > 0) {
+            echo 'SKU_EXISTS';
+        } else
         if ($result->execute()) {
             return $result->insert_id;
         } else {
@@ -91,39 +98,25 @@ class Database
         }
     }
 
-    // function deleteProduct($id)
-    // {
-        
-    //     $query = "DELETE FROM products WHERE id = ?";
-    //     $result = $this->mysqli->prepare($query);
-    //     $result->bind_param("i", $id);
-    //     $result->execute();
-    //     if ($result) {
-    //         echo "product dropped successfully";
-    //     } else {
-    //         echo  "there was an error dropping the product";
-    //     }
-    // }
+    function deleteProduct($id)
+    {
 
-function deleteProduct($id)
-{
-    
         $query = "DELETE  FROM products WHERE id = ?";
         $result = $this->mysqli->prepare($query);
         $result->bind_param("i", $id);
         $result->execute();
- 
-        $query = "DELETE FROM `DVD` WHERE `productId` = '$id'";
+
+        $query = "DELETE FROM `DVD` WHERE `productId` = ?";
         $result = $this->mysqli->prepare($query);
         $result->bind_param("s", $id);
         $result->execute();
 
-        $query = "DELETE FROM `book` WHERE `productId` = '$id'";
+        $query = "DELETE FROM `book` WHERE `productId` = ?";
         $result = $this->mysqli->prepare($query);
         $result->bind_param("s", $id);
         $result->execute();
 
-        $query = "DELETE FROM `furniture` WHERE `productId` = '$id'";
+        $query = "DELETE FROM `furniture` WHERE `productId` = ?";
         $result = $this->mysqli->prepare($query);
         $result->bind_param("s", $id);
         $result->execute();
@@ -132,18 +125,24 @@ function deleteProduct($id)
         } else {
             echo  "there was an error dropping the product";
         }
-    }     
-    
+    }
 
-    function    selectProducts()
-{
-    $query= "SELECT p.id, p.name, p.sku, p.price, p.productType, d.size as size, NULL as weight, Null as height, Null as length, Null as width FROM products p JOIN DVD d ON p.id = d.productId 
+    function selectProducts()
+    {
+        $query = "SELECT p.id, p.name, p.sku, p.price, p.productType, d.size as size, NULL as weight, Null as height, Null as length, Null as width FROM products p JOIN DVD d ON p.id = d.productId 
     UNION 
     SELECT p.id, p.name, p.sku, p.price, p.productType, NULL as size, b.weight as weight, Null as height, Null as length, Null as width FROM products p JOIN book b ON p.id = b.productId 
     UNION 
     SELECT p.id, p.name, p.sku, p.price, p.productType, NULL as size, NULL as weight, f.height as height, f.length as length, f.width as width FROM products p JOIN furniture f ON p.id = f.productId;";
 
         $result = $this->mysqli->query($query);
+        return $result;
+    }
+
+    function checkSku($sku)
+    {
+        $check = "SELECT sku FROM `products` WHERE sku='$sku'";
+        $result = $this->mysqli->query($check);
         return $result;
     }
 };

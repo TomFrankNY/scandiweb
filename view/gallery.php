@@ -10,37 +10,41 @@ require_once '../Database.php';
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../styles.css" />
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <a href="productAddPage.php">Add Product</a>
-    <!-- NEED TO ADD LINK TO DELETE BUTTON -->
+    <a href="productAddPage.php" class="form-control btn btn-success">Add Product</a>
 </head>
 <?php
-    $db = Database::getInstance();
-    $result = $db->selectProducts();
-    if ($result->num_rows > 0) {
+$db = Database::getInstance();
+$result = $db->selectProducts();
+if ($result->num_rows > 0) {
 ?>
-        <body> 
-            <div>
-                <form action="../controllers/drop.php" method="post">
-                    <?php
-                    // output data of each row
-                    while ($row = $result->fetch_assoc()) {
-                    ?>
-                        <label for="checkbox"><?php echo "sku:", $row["sku"], "name:", $row["name"], "price:", $row["price"], "product-type:", $row["productType"] ?> Delete </label>
-                        <input type="checkbox" name="delete_checkbox[]" class="delete-checkbox" value="<?php echo $row["id"] ?>">
-                        <br>
-                    <?php
-                    }
-                    ?>
-                    <label for="submit"></label>
-                    <input type="submit" name="remove" value="remove" />
-    </form>
-   </div>
-</body>
+    <body>
+        <div>
+            <form action="../controllers/drop.php" method="post">
+                <?php
+                // output data of each row
+                while ($row = $result->fetch_assoc()) {
+                ?>
+                    <div class="col-sm-4" id="borda"> 
+                        <label for="checkbox">
+                        <?php echo "SKU:", $row["sku"], " <br>Name:", $row["name"], " <br>Price:", $row["price"], "<br>Product-Type:", $row["productType"] ?> <br>Delete </label>
+                    <input type="checkbox" name="delete_checkbox[]" class="delete-checkbox form-group" value="<?php echo $row["id"] ?>"> </div>
+
+                <?php
+                }
+                ?>
+                <label for="submit"></label>
+                <input type="submit" name="delete" value="Mass Delete" class="form-control btn btn-danger" />
+            </form>
+        </div>
+    </body>
+
 </html>
 <?php
-    }
+}
 ?>
