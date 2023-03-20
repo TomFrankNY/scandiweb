@@ -94,11 +94,11 @@ require_once '../Database.php';
                         <option value="furniture" data-show=".furniture">Furniture</option>
                     </select>
                     <div class="productType form-group" id="productTypeId">
-                        <div class="dvd hide">
+                        <div class=" dvd hide">
                             Please, provide size <br>
-                            <span> Size:MB<input class="form-control" type="number" name="size" id="size"></input>
+                             Size:MB<input class="form-control" type="number" name="size" id="size"></input>
                         </div>
-                        </span>
+                
 
                         <div class=" book hide">Please, provide weight<br> Weight:Kg<input class="form-control" type="number" name="weight" id="weight"></input></div>
                         <div class=" furniture hide">Please, provide dimensions<br>
