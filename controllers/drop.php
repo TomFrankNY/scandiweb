@@ -3,7 +3,7 @@ require_once "../Database.php";
 
 // function drop()
 //     {
-    if (isset($_POST['remove'])) {
+    if (isset($_POST['delete'])) {
         $db = Database::getInstance();
         $redirect_gallery = '../view/gallery.php';   
         if (!empty($_POST['delete_checkbox'])) {
