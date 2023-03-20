@@ -47,12 +47,13 @@ class Database
         $addDvd = "INSERT INTO DVD (productId, size) VALUES (?, ?);";
         $result = $this->mysqli->prepare($addDvd);
         $result->bind_param('ss', $properties['productId'], $properties['size']);
-        if ($result->execute()) {
+        try { 
+        $result->execute();
+        }  catch (Exception $e) {
+            echo "there was an error adding the DVD:" . $e;
+        } 
             echo "DVD added successfully. The Id of the DVD is:" . $result->insert_id;
-        } else {
-            echo "there was an error adding the DVD: " . $this->mysqli->error;
-        };
-    }
+        }
 
     function addBook($properties)
     {
