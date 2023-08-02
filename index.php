@@ -1,26 +1,27 @@
 <?php
-require_once 'Database.php';
-require_once 'Router.php';
+require_once __DIR__.'/vendor/autoload.php';
+require_once __DIR__.'/Database.php';
+require_once __DIR__.'/Router.php';
+require_once __DIR__.'/controllers/Controller.php';
 
-$router->get('/', [ProductController::class, 'index']);
-$router->get('/products', [ProductController::class, 'index']);
-$router->get('/products/create', [ProductController::class, 'create']);
-$router->get('/products/delete', [ProductController::class, 'delete']);
-// use app\controllers\ProductController;
-// use app\Router;
+$database = Database :: getInstance();
+$router = new Router($database);
 
-// require_once __DIR__.'/../vendor/autoload.php';
+$router->get('/', [new Controller(), 'gallery']);
+$router->post('/', [new Controller(),'gallery']);
 
-// $database = new \app\Database();
-// $router = new Router($database);
+$router->post('/add', [new Controller(), 'add']);
+$router->get('/add', [new Controller(), 'add']);
 
-// $router->get('/', [ProductController::class, 'index']);
-// $router->get('/products', [ProductController::class, 'index']);
-// $router->get('/products/index', [ProductController::class, 'index']);
-// $router->get('/products/create', [ProductController::class, 'create']);
-// $router->post('/products/create', [ProductController::class, 'create']);
-// $router->get('/products/update', [ProductController::class, 'update']);
-// $router->post('/products/update', [ProductController::class, 'update']);
-// $router->post('/products/delete', [ProductController::class, 'delete']);
+$router->post('/gallery', [new Controller(), 'gallery']);
+$router->get('/gallery', [new Controller(), 'gallery']);
 
-// $router->resolve();
+$router->post('/drop', [new Controller(), 'drop']);
+$router->get('/drop', [new Controller(), 'drop']);
+
+$router->resolve();
+
+// Avoid using conditional statements for handling differences in product types. This means you should avoid any if-else and switch-case statements which are used to handle any difference between products.
+// Do not keep your JavaScript code within files with HTML markup, move it to a separate file/-s.
+// After successful save action, a user should be redirected to the product list page.
+// Frontend styling differs from provided wireframes, please adjust elements positioning and make pages match wireframes more or less.

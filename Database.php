@@ -1,9 +1,12 @@
 <?php
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
+// use controllers\Controller;
+// use models\Product;
+// use models\Dvd;
+
 class Database
 {
-
     protected $db_host;
     protected $db_user;
     protected $db_password;
@@ -13,10 +16,14 @@ class Database
 
     private function __construct()
     {
-        $this->db_host = 'localhost:8889';
+        $this->db_host = 'localhost:8089';
+        // $this->db_host = 'localhost';
         $this->db_user = 'root';
+        // $this->db_user = 'id20640252_root';
         $this->db_password = 'root';
-        $this->db_db = 'cartDB';
+        // $this->db_password = 'dDl}}skjG)vX6B)6';
+        $this->db_db = 'cartdb';
+        // $this->db_db = 'id20640252_cartdb';
         $this->connect();
     }
 
@@ -47,13 +54,13 @@ class Database
         $addDvd = "INSERT INTO DVD (productId, size) VALUES (?, ?);";
         $result = $this->mysqli->prepare($addDvd);
         $result->bind_param('ss', $properties['productId'], $properties['size']);
-        try { 
-        $result->execute();
-        }  catch (Exception $e) {
+        try {
+            $result->execute();
+        } catch (Exception $e) {
             echo "there was an error adding the DVD:" . $e;
-        } 
-            echo "DVD added successfully. The Id of the DVD is:" . $result->insert_id;
         }
+        echo "DVD added successfully. The Id of the DVD is:" . $result->insert_id;
+    }
 
     function addBook($properties)
     {
@@ -101,11 +108,12 @@ class Database
 
     function deleteProduct($id)
     {
-
         $query = "DELETE  FROM products WHERE id = ?";
         $result = $this->mysqli->prepare($query);
         $result->bind_param("i", $id);
         $result->execute();
+
+        $redirect_gallery = '../view/gallery.php';
 
         $query = "DELETE FROM `DVD` WHERE `productId` = ?";
         $result = $this->mysqli->prepare($query);
@@ -126,6 +134,8 @@ class Database
         } else {
             echo  "there was an error dropping the product";
         }
+
+    header('Location: ' . $redirect_gallery);
     }
 
     function selectProducts()

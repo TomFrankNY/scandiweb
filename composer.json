@@ -1,0 +1,15 @@
+{
+    "name": "rosinha/scandiweb",
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "TomFrankNY",
+            "email": "tomcichra@gmail.com"
+        }
+    ],
+    "require": {}
+}

@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
-// use Database;
-require_once '../Database.php';
-?>
 
 <head>
-    <!-- do i need php on this file? -->
     <link rel="stylesheet" href="../styles.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -14,17 +9,12 @@ require_once '../Database.php';
     <script>
         $(document).on('change', '.productSwitcher', function() {
             var target = $(this).data('target');
-            var show = $("option:selected", this).data('show'); //why did this break? why is data-target is missing?
+            var show = $("option:selected", this).data('show');
             $(target).children().addClass('hide');
             $(target).children().children('input').removeAttr('required');
             $(show).children('input').attr('required', 'true')
             $(show).removeClass('hide');
         });
-
-        // handle sku checker on submit ##HOW TO KNOW IN JS WHEN FORM IS SUBMITTED)
-
-        // $(document).on("submit").click(function()
-        // {
         $(document).on('change', '#sku', function() {
             $('#sku').blur(function() {
                 var sku = $(this).val();
@@ -36,7 +26,7 @@ require_once '../Database.php';
                         sku: $('#sku').val(),
                         text: "Thommy knows how to prepare a Mate"
                     },
-                    // url: '../Database.php',
+                    
                     success: function(data) {
                         if (data === 'SKU_EXISTS') {
                             $('#warning')
@@ -52,21 +42,9 @@ require_once '../Database.php';
                         }
                     }
                 })
-                // .done(function(response){
-                //     $('#sku').html(response);
-                // });
             });
         });
     </script>
-
-    <!-- how to check if theres no doubles of sku?? -->
-    <!-- <script>
-        $.ajax({
-            'url': '../controllers/add.php',
-            'type': 'POST',
-            'dataType': ''
-        })
-        </script> -->
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -78,7 +56,8 @@ require_once '../Database.php';
     <div class="container">
         <div class="card">
             <div class="form-group">
-                <form action='../controllers/add.php' method='post' id='form'>
+                <!-- <form action='../controllers/Controller.php' method='post' id='form'> -->
+                <form method="post" enctype="multipart/form-data" action="/add" >
                     SKU <input class="form-control" type="text" name="sku" id="sku" required>
                     <span id="warning"></span>
                     <br>
@@ -87,7 +66,7 @@ require_once '../Database.php';
                     Price: <input class="form-control" type="number" name="price" id="price" min="1" required>
                     <br>
                     Type Switcher
-        <select class="productSwitcher form-control" id="productType" name="productType" data-target=".productType" required>
+                    <select class="productSwitcher form-control" id="productType" name="productType" data-target=".productType" required>
                         <option value="">Select...</option>
                         <option value="dvd" data-show=".dvd">DVD</option>
                         <option value="book" data-show=".book">Book</option>
@@ -96,10 +75,8 @@ require_once '../Database.php';
                     <div class="productType form-group" id="productTypeId">
                         <div class=" dvd hide">
                             Please, provide size <br>
-                             Size:MB<input class="form-control" type="number" name="size" id="size"></input>
+                            Size:MB<input class="form-control" type="number" name="size" id="size"></input>
                         </div>
-                
-
                         <div class=" book hide">Please, provide weight<br> Weight:Kg<input class="form-control" type="number" name="weight" id="weight"></input></div>
                         <div class=" furniture hide">Please, provide dimensions<br>
                             Height:cm<input class="form-control" type="number" name="height" id="height"><br>
@@ -109,7 +86,7 @@ require_once '../Database.php';
                     </div>
                     <label for="submit"></label>
                     <input type="submit" name="submit" value="Submit" id="submit" class="btn btn-success form-control" disabled />
-                    <a href="gallery.php" class="btn btn-danger form-control"> Cancel</a>
+                    <a href="gallery" class="btn btn-danger form-control"> Cancel</a>
                 </form>
             </div>
         </div>

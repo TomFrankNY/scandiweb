@@ -1,8 +1,6 @@
 <?php
-// use Database;
 require_once '../Database.php';
 ?>
-
 <html lang="en">
 
 <head>
@@ -15,19 +13,18 @@ require_once '../Database.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <a href="productAddPage.php" class="form-control btn btn-success">Add Product</a>
+    <a href="add" class="form-control btn btn-success">Add Product</a>
 </head>
 <?php
 $db = Database::getInstance();
 $result = $db->selectProducts();
+
 if ($result->num_rows > 0) {
 ?>
     <body>
         <div>
-            <form action="../controllers/drop.php" method="post">
+            <form method="post" enctype="multipart/form-data" action="/drop" >
                 <?php
-                // output data of each row
                 while ($row = $result->fetch_assoc()) {
                 ?>
                     <div class="col-sm-4" id="borda"> 
@@ -46,5 +43,8 @@ if ($result->num_rows > 0) {
 
 </html>
 <?php
+}
+else {
+    
 }
 ?>

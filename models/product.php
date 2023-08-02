@@ -2,7 +2,6 @@
 
 abstract class Product
 {
-
     protected $sku;
     protected $name;
     protected $price;
@@ -44,22 +43,4 @@ abstract class Product
             echo 'SKU_AVAILABLE';
         }
     }
-
-    //     {
-
-    // $sku = ($_POST['sku']);
-    // $db = Database::getInstance();
-    // $newVar = $db->checkSku($sku);
-    // // echo $sku." caca";
-    // $checkProduct = "SELECT sku FROM products WHERE sku='$sku'";
-    // $check = $this->mysqli->query($checkProduct);
-    // if (mysqli_num_rows($check) > 0) 
-    //    {
-    //     echo 'SKU_EXISTS';
-    //    }
-    // else{
-    //     echo 'SKU_AVAILABLE';
-    // }
-    //     }
-
 }
