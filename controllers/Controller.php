@@ -15,29 +15,30 @@ class Controller
         $router->renderView('productAddPage');
         if (isset($_POST['submit'])) 
         {
-            $properties['sku'] = $_REQUEST['sku'];
-            $properties['name'] = $_REQUEST['name'];
-            $properties['price'] = $_REQUEST['price'];
-            $properties['productType'] = $_REQUEST['productType'];
+            // $properties['sku'] = $_REQUEST['sku'];
+            // $properties['name'] = $_REQUEST['name'];
+            // $properties['price'] = $_REQUEST['price'];
+            // $properties['productType'] = $_REQUEST['productType'];
+            $properties = $_REQUEST;
             $redirect_gallery = '../view/gallery.php';
-            echo "isset";
-            if ($properties['productType'] == 'dvd') {
-                $properties['size'] = $_POST['size'];
-                $product = new Dvd($properties);
-            } elseif ($properties['productType'] == 'book') {
-                $properties['weight'] = $_POST['weight'];
-                $product = new Book($properties);
-            } else {
-                $properties['height'] = $_POST['height'];
-                $properties['length'] = $_POST['length'];
-                $properties['width'] = $_POST['width'];
-                $product = new Furniture($properties);
+            $product = new $_REQUEST['productType']($properties); // creating a new object of the requested product type so we don't need to use request statement try and create whatevers inside here
+            // echo "isset";
+            // if ($properties['productType'] == 'dvd') {
+            //     $properties['size'] = $_POST['size'];
+                // $product = new Dvd($properties);
+            // } elseif ($properties['productType'] == 'book') {
+            //     $properties['weight'] = $_POST['weight'];
+                // $product = new Book($properties);
+            // } else {
+            //     $properties['height'] = $_POST['height'];
+            //     $properties['length'] = $_POST['length'];
+            //     $properties['width'] = $_POST['width'];
+                // $product = new Furniture($properties);
             }
             $product->save();
-
             header('Location: ' . $redirect_gallery);
             echo "Product added successfully!";
-        }
+        // }
         }
     function drop()
     {
