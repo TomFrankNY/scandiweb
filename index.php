@@ -21,7 +21,6 @@ $router->get('/drop', [new Controller(), 'drop']);
 
 $router->resolve();
 
-// Avoid using conditional statements for handling differences in product types. This means you should avoid any if-else and switch-case statements which are used to handle any difference between products.
 // Do not keep your JavaScript code within files with HTML markup, move it to a separate file/-s.
 // After successful save action, a user should be redirected to the product list page.
 // Frontend styling differs from provided wireframes, please adjust elements positioning and make pages match wireframes more or less.

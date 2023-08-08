@@ -32,7 +32,7 @@ class Router
             $fn = $this->postRoutes[$url] ?? null;
         }
         if (!$fn) {
-            echo 'Page not found';
+            // echo 'Page not found';
             exit;
         }
         call_user_func($fn, $this);

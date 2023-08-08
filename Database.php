@@ -59,7 +59,7 @@ class Database
         } catch (Exception $e) {
             echo "there was an error adding the DVD:" . $e;
         }
-        echo "DVD added successfully. The Id of the DVD is:" . $result->insert_id;
+        // echo "DVD added successfully. The Id of the DVD is:" . $result->insert_id;
     }
 
     function addBook($properties)
