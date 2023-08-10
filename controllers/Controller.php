@@ -20,7 +20,7 @@ class Controller
              }
         $product->save();
         header('Location: ' . $redirect_gallery);
-        echo "Product added successfully!";
+        // echo "Product added successfully!";
     }
     function drop()
     {
