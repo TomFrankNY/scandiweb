@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script>
+    <script type="text/javascript" src="../scripts/script.js"></script>
+    <!-- <script>
         $(document).on('change', '.productSwitcher', function() {
             var target = $(this).data('target');
             var show = $("option:selected", this).data('show');
@@ -44,7 +45,7 @@
                 })
             });
         });
-    </script>
+    </script> -->
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
