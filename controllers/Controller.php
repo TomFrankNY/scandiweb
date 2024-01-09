@@ -17,11 +17,10 @@ class Controller
             $properties = $_REQUEST;
             $redirect_gallery = '../view/gallery.php';
             $product = new $_REQUEST['productType']($properties);
+            $product->save();
+            header('Location: ' . $redirect_gallery);
              }
-        $product->save();
-        header('Location: ' . $redirect_gallery);
-        // echo "Product added successfully!";
-    }
+            }
     function drop()
     {
         if (isset($_POST['delete'])) {
